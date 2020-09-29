@@ -97,7 +97,7 @@ def start_container_with_args(context, entrypoint):
     container = Container(context.config.userdata['IMAGE'], name=context.scenario.name)
     container.startWithEntryPoint(entrypoint)
     context.containers.append(container)
-    wait_for_process(context, pname)    
+    wait_for_process(context, entrypoint)    
 
 
 @given(u'container is started with command {cmd}')
