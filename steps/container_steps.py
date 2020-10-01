@@ -93,7 +93,7 @@ def start_container_with_args(context, pname="java"):
     wait_for_process(context, pname)
 
 @given(u'container is started with entrypoint {entrypoint}')
-def start_container_with_args(context, entrypoint):
+def start_container_with_entrypoint(context, entrypoint):
     container = Container(context.config.userdata['IMAGE'], name=context.scenario.name)
     container.startWithEntryPoint(entrypoint)
     context.containers.append(container)
