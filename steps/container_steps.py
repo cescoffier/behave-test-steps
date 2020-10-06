@@ -94,8 +94,8 @@ def start_container_with_args(context, pname="java"):
 
 @given(u'container is started with entrypoint {entrypoint}')
 def start_container_with_entrypoint(context, entrypoint):
-    container = Container(context.config.userdata['IMAGE'], name=context.scenario.name)
-    container.startWithEntryPoint(entrypoint)
+    container = Container(context.config.userdata['IMAGE'], name=context.scenario.name, entrypoint=entrypoint)
+    container.start()
     context.containers.append(container)
     wait_for_process(context, entrypoint)    
 
@@ -208,6 +208,7 @@ def run_log_contains_msg(context, message, timeout):
 
     while True:
         logs = container.get_output().decode()
+        print(logs)
         if message in logs:
             logging.info("Message '%s' was found in the logs" % message)
             return True
