@@ -34,7 +34,8 @@ import time
 try:
     d = docker.Client(version="1.22")
 except:
-    d = docker.APIClient(version="1.22")
+    base_url=os.getenv('DOCKER_HOST', 'unix://var/run/docker.sock')
+    d = docker.APIClient(base_url=base_url, version="1.22")
 
 
 class ExecException(Exception):
