@@ -1,5 +1,6 @@
 import docker
 import logging
+import os
 
 
 from behave import then
@@ -8,7 +9,8 @@ from behave import then
 try:
     DOCKER_CLIENT = docker.Client(version="1.22")
 except:
-    DOCKER_CLIENT = docker.APIClient(version="1.22")
+    base_url=os.getenv('DOCKER_HOST', 'unix://var/run/docker.sock')
+    DOCKER_CLIENT = docker.APIClient(base_url=base_url, version="1.22")
 
 LOG_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 logging.basicConfig(format=LOG_FORMAT)
